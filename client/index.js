@@ -1,6 +1,11 @@
 console.log('so fetch!')
 
 // GET Lesson:
+function getFetch(){
+fetch('http://localhost:3001/api/v1/users')
+.then(response => response.json())
+.then(data => console.log(data))
+}
 // 1. Make a GET request to get all of the users for a given resource, and log those items to the console.
 // 2. Make a GET request to get all of the animals for a given resource, and log those items to the console.
 // 3. Make a GET request to get all of the sports items for a given resource, and log those items to the console.
@@ -10,6 +15,29 @@ console.log('so fetch!')
 // Don't do the next section until the POST lesson!
 
 // POST Lesson:
+const addItem = document.querySelector(".js-add-item")
+
+addItem.addEventListener('click', postFetch)
+
+function postFetch() { 
+fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST', 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+        id: Date.now(),
+        name: 'Beth',
+        status: 'test',
+        interests: 'test'
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.log({error}));
+
+getFetch()
+
+}
+
 // 1. Make a POST request to create a new instance of that resource, and log the result to the console.
 // 2. Rerun your previous GET fetch request to verify you added the new resource
 // 3. Add an event listener, so that when you click button.js-add-item, it will make a fetch request to POST that item to the server, AND update the page with the newly updated collection
